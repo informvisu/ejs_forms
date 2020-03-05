@@ -1,0 +1,72 @@
+{
+	"type": "form",
+	"name": "userdataForm",
+	"action": "userdata",
+	"inputs": [
+		{
+			"type": "text",
+			"name": "firstName",
+			"label": "Firstname",
+			"size": "25",
+			"placeholder": "Firstname",
+			"show": true,
+			"enabled": true,
+			"isArray": false,
+			"valueOptions": "",
+			"valueType": "",
+			"valueLength": ""
+		},
+		{
+			"type": "text",
+			"name": "lastName",
+			"label": "Lastname",
+			"size": "25",
+			"placeholder": "Lastname",
+			"show": true,
+			"enabled": true,
+			"isArray": false,
+			"valueOptions": "",
+			"valueType": "",
+			"valueLength": ""
+		},
+		{
+			"type": "text",
+			"name": "education/level",
+			"label": "Level",
+			"size": "25",
+			"placeholder": "Degree",
+			"show": true,
+			"enabled": true,
+			"isArray": true,
+			"valueOptions": "",
+			"valueType": "",
+			"valueLength": ""
+		},
+		{
+			"type": "text",
+			"name": "education/field",
+			"label": "Field",
+			"size": "25",
+			"placeholder": "Field",
+			"show": true,
+			"enabled": true,
+			"isArray": true,
+			"valueOptions": "",
+			"valueType": "",
+			"valueLength": ""
+		},
+		{
+			"type": "text",
+			"name": "education/percentage",
+			"label": "Percentage",
+			"size": "25",
+			"placeholder": "percentage",
+			"show": true,
+			"enabled": true,
+			"isArray": true,
+			"valueOptions": "",
+			"valueType": "",
+			"valueLength": ""
+		}
+	]
+}
