@@ -1,0 +1,109 @@
+<script type="text/javascript">
+  var i = 0;
+  var add = function(grName, params, el) {
+    ++i;
+    var grParams = params.split(",");
+    for(var p=0; p<grParams.length; p++) {
+      var original = document.getElementById(grName+grParams[p]+0);
+      console.log('Push', grName, grParams, original)
+      var clone = original.cloneNode(true);
+      clone.id = grName+grParams[p]+i;
+      clone.name = grName+grParams[p]+i;
+      original.parentNode.appendChild(clone);
+    }
+  }
+  var remove = function(grName, params, el) {
+    if(i<1) {window.alert("Can't remove the first item"); return};
+    var grParams = params.split(",");
+    for(var p=0; p<grParams.length; p++) {
+      var lastItem = document.getElementById(grName+grParams[p]+i);
+      console.log('Pop', grName, grParams, lastItem)
+      lastItem.parentNode.removeChild(lastItem);
+    }
+    --i;
+    window.alert("Removed last item");
+  }
+</script>
+
+<form name="<%= data.name %>" action="<%= data.action %>" method="POST">
+<%
+var elGroups = new Set();
+var elMap = new Map();
+for (i=0; i<data.inputs.length; i++) {
+  var elGroupName = '';  
+  var elName = data.inputs[i].name;
+  if(elName.indexOf("/")>0) {
+    elGroupName = elName.split('/')[0];
+    elName = elName.split('/')[1];
+  }
+  
+  if(elMap.has(elGroupName)) {
+    var val = elMap.get(elGroupName);
+    val.push(elName)
+    elMap.set(elGroupName, val);
+  } else {
+    elMap.set(elGroupName, [elName]);
+  }
+}
+console.log(elMap);
+
+
+var fieldSet = false;
+for (i=0; i<data.inputs.length; i++) {
+  var el = data.inputs[i];
+  var elName = el.name;
+  var elDivName = el.name;
+  var elGroupName;
+  if(elName.indexOf("/")>0) {
+    elGroupName = elName.split('/')[0];
+    elDivName = elName.split('/')[0]+elName.split('/')[1];
+    elName = elName.split('/')[0]+"["+elName.split('/')[1]+"]";
+    //if(el.isArray) elName += "["+i+"]";
+    if(!elGroups.has(elGroupName)) {
+      fieldSet = true;
+%>
+      <fieldset>
+      <legend>
+        <%- elGroupName %>:
+<%    if(el.isArray) { %>
+        &nbsp;&nbsp;&nbsp;<a onclick='add("<%= elGroupName %>", "<%= elMap.get(elGroupName) %>", this)'>+</a>
+        &nbsp;&nbsp;&nbsp;<a onclick='remove("<%= elGroupName %>", "<%= elMap.get(elGroupName) %>", this)'>-</a>
+<%    } %>
+      </legend>
+<%
+      elGroups.add(elGroupName);
+    }
+  }
+%>
+      <div class="row">
+  	    <div class="col-sm-1">
+  	      <label for="<%= elName %>"><%= el.label %></label>
+  	    </div>
+  	    <div id="<%= elDivName %>0" name="<%= elDivName %>0" class="col-sm-1">
+<%
+  if(el.type=="text") {
+%>
+          <input type="text" id="<%= elName %>" name="<%= elName %>" placeholder="<%= el.placeholder %>" />
+<%
+  } else if(el.type=="password") {
+%>
+          <input type="password" id="<%= elName %>" name="<%= elName %>" placeholder="<%= el.placeholder %>" />
+<%
+  } else if(el.type=="select") {
+%>
+          <select id="<%= elName %>" name="<%= elName %>" placeholder="<%= el.placeholder %>" />
+<%
+  }
+%>
+        </div>
+      </div>
+<%
+  if(fieldSet==true && (!elGroupName || (i==data.inputs.length-1) )) {
+%>
+      </fieldset>
+<%
+  }
+}
+%>
+      <input type="submit"/>
+</form>
