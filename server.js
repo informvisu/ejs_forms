@@ -24,7 +24,7 @@ setTimeout(function() {
 const app = express();
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src/views'));
+//app.set('views', path.join(__dirname, 'src/views'));
 
 app.use(express.static(path.join(__dirname, 'src/views')));
 
@@ -74,6 +74,9 @@ app.get('/',(req, res) => {
 app.get('/favicon.ico',(req, res) => {
   res.download(env.get('app.logo'));
 });
+
+const commandRoutes = require('./src/routes/command');
+app.use('/command', commandRoutes);
 
 const requestRoutes = require('./src/routes/db/requests');
 app.use('/request', requestRoutes);
