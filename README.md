@@ -6,5 +6,5 @@ npm install nodemon -g
 npm install htpasswd -g
 
 # Create users
-Run 'htpasswd -c users.password <username> ' on command line to generate the users.password file  
-Run 'htdigest -c users.digest <groupname> <username>' on command line to generate the users.digest file
+Run 'htpasswd -c users.password user1' on command line to generate the users.password file  
+Run 'htdigest -c users.digest group1 user1' on command line to generate the users.digest file
