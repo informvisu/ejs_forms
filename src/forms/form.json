@@ -1,7 +1,7 @@
 {
 	"type": "form",
-	"name": "userdataForm",
-	"action": "userdata",
+	"name": "commandForm",
+	"action": "command",
 	"inputs": [
 		{
 			"type": "text",
