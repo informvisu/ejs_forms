@@ -7,5 +7,5 @@ Automatcically create Bootstrap form with nested and duplicate inputs based on a
 - npm install htpasswd -g
 
 # Create users
-- Run 'htpasswd -c users.password user1' on command line to generate the users.password file  
-- Run 'htdigest -c users.digest group1 user1' on command line to generate the users.digest file
+- 'htpasswd -c users.password user1' on command line generates the users.password file //for basic auth  
+- 'htdigest -c users.digest group1 user1' on command line generates the users.digest file //for digest auth
