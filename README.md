@@ -1,7 +1,8 @@
 # ejs_forms
 Automatcically create Bootstrap form with nested and duplicate inputs based on a JS object  
 
-# install global packages
+# setup
+'mkdir db' on the application route
 npm install nodemon -g  
 npm install htpasswd -g
 
