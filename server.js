@@ -29,22 +29,22 @@ app.set('views', path.join(__dirname, 'src/views'));
 app.use(express.static(path.join(__dirname, 'src/views')));
 
 var hostname = require('os').hostname();
-//var hostname = env.get('node.host');
+//var hostname = env.get('app.host');
 
 var server;
 //Create Server
-if(env.get('node.allowHttps')=='yes') {
+if(env.get('app.allowHttps')=='yes') {
 	var options = {
 			key: fs.readFileSync(__dirname +'/'+env.get('security.decryptedkey')),
 			cert: fs.readFileSync(__dirname +'/'+env.get('security.certificate'))
 		};
-	server = https.createServer(options, app).listen(env.get('node.httpsport'), hostname, () => {
-		logger.info('application is listening at https://'+hostname+':'+env.get('node.httpsport'));
+	server = https.createServer(options, app).listen(env.get('app.httpsport'), hostname, () => {
+		logger.info('application is listening at https://'+hostname+':'+env.get('app.httpsport'));
 	});
 }
-if(env.get('node.allowHttp')=='yes') {
-	server = http.createServer(app).listen(env.get('node.httpport'), hostname, () => {
-		logger.info('application is listening at http://'+hostname+':'+env.get('node.httpport'));
+if(env.get('app.allowHttp')=='yes') {
+	server = http.createServer(app).listen(env.get('app.httpport'), hostname, () => {
+		logger.info('application is listening at http://'+hostname+':'+env.get('app.httpport'));
 	});
 }
 
@@ -73,7 +73,7 @@ app.get('/',(req, res) => {
 	res.render('layout', {data: 'Hello, Wecome to MyApp!'});
 });
 app.get('/favicon.ico',(req, res) => {
-  res.download('favicon.ico');
+  res.download(env.get('app.logo'));
 });
 
 const requestRoutes = require('./src/routes/db/requests');
