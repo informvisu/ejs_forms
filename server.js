@@ -49,7 +49,6 @@ if(env.get('app.allowHttp')=='yes') {
 }
 
 // Authentication module.
-//Run 'htdigest user1 Sample' on command line to generate the users.digest file
 app.use(authConnect(authenticate));
 
 app.set('trust proxy', 1) // trust first proxy
