@@ -21,7 +21,7 @@ commandRoutes.post('/', function (req, res, next) {
 	logger.info(logPrefix+ 'req.body: '+ JSON.stringify(req.body))
 	var target = req.body.target;
 	var command = req.body.command;
-	var parameters = req.body.parameters;
+	var parameters = req.body.education;//TODO
 	var credentials = Buffer.from(req.headers.authorization.split(" ")[1], 'base64').toString();
 	var username = credentials.split(':')[0];
 	
